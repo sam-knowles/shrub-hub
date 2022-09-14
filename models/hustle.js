@@ -14,6 +14,10 @@ const hustleSchema = new Schema({
         type: String,
         required: true
     }
+    dreams: {
+        type: String,
+        required: true
+    }
 })
 
 module.exports = mongoose.model("Hustle", hustleSchema)
