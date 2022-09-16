@@ -35,6 +35,6 @@ app.use((err, req, res, next) => {
     return res.send({errMsg: err.message})
 })
 
-app.listen(3000, () => {
-    console.log('Listening on port 3000');
+app.listen(8000, () => {
+    console.log(`Listening on port + ${process.env.PORT}`);
 });
