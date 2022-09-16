@@ -1,16 +1,25 @@
 const express = require('express')
 const hustleRouter = express.Router()
-const { v4: uuid } = require('uuid');
+const Hustle = require('../models/hustle.js')
+// const { v4: uuid } = require('uuid');
 
-const hustles = [
-    {name: "shrub hub", description: "plant identification", market: "botanists", _id: uuid() },
-    {name: "side hustles", description: "side projects", market: "entrepreneurs", _id: uuid() },
-    {name: "purpose", description: "finding one's purpose", market: "humans", _id: uuid() },
-    {name: "habits", description: "habit tracking", market: "humans", _id: uuid() }
-]
+// const hustles = [
+//     {name: "shrub hub", description: "plant identification", market: "botanists", _id: uuid() },
+//     {name: "side hustles", description: "side projects", market: "entrepreneurs", _id: uuid() },
+//     {name: "purpose", description: "finding one's purpose", market: "humans", _id: uuid() },
+//     {name: "habits", description: "habit tracking", market: "humans", _id: uuid() }
+// ]
 
-hustleRouter.get("/", (req, res) => {
-    res.send(hustles)
+hustleRouter.get("/", (req, res, next) => {
+    Hustle.find((err, hustles) => {
+        console.log(err)
+        if(err){
+            res.status(500)
+            return next(err)
+        }
+        console.log(hustles)
+        return res.status(200).send(hustles)
+    })
 })
 
 hustleRouter.get("/:hustleId", (req, res) => {
