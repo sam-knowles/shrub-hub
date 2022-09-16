@@ -10,13 +10,16 @@ const app = express();
 const morgan = require('morgan')
 const mongoose = require('mongoose');
 
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
+
+
 mongoose.connect('mongodb://localhost:27017/hustlesdb',
-// {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//     useCreateIndex: true,
-//     useFindAndModify: false
-// },
+{
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+},
 () => console.log("Connected to the DB")
 )
 
