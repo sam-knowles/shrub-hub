@@ -58,11 +58,19 @@ hustleRouter.delete("/:hustleId", (req, res, next) => {
     })
 })
 
-hustleRouter.put("/:hustleId", (req, res) => {
-    const hustleId = req.params.hustleId
-    const hustleIndex = hustles.findIndex(hustle => hustle._id === hustleId)
-    const updatedHustle = Object.assign(hustles[hustleIndex], req.body)
-    res.status(201).send(updatedHustle)
+hustleRouter.put("/:hustleId", (req, res, next) => {
+    Hustle.findOneAndUpdate(
+        { _id: req.params.hustleId },
+        req.body,
+        { new: true },
+        (err, updatedHustle) => {
+            if(err){
+                res.status(500)
+                return next(err)
+            }
+            return res.status(201).send(updatedHustle)
+        }
+    )
 })
 
 
