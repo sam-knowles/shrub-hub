@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 export default function AddHustleForm(props){
-    const initInputs = {name: "", description: "", market: ""}
+    const initInputs = {name: props.name || "", description: props.description || "", market: props.market || ""}
     const [inputs, setInputs] = useState(initInputs)
 
     function handleChange(e){
@@ -11,7 +11,7 @@ export default function AddHustleForm(props){
 
     function handleSubmit(e){
         e.preventDefault()
-        props.addHustle(inputs)
+        props.submit(inputs, props._id)
         setInputs(initInputs)
     }
 
@@ -34,7 +34,7 @@ export default function AddHustleForm(props){
             value={inputs.market} 
             onChange={handleChange} 
             placeholder="Market"/>
-         <button>Add Hustle</button>
+         <button>{props.btnText}</button>
         </form>
     )
 }

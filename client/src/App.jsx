@@ -28,6 +28,14 @@ export default function App() {
     .catch(err => console.log(err))
   }
 
+  function editHustle(updates, hustleId){
+    axios.put(`/hustles/${hustleId}`, updates)
+    .then(res => {
+      setHustles(prevHustles => prevHustles.map(hustle => hustle.id !== hustleId ? hustle : res.data))
+    })
+    .catch(err => console.log(err))
+  }
+
   useEffect(() => {
     getHustles()
   }, [])
@@ -35,14 +43,16 @@ export default function App() {
   return (
       <div>
         <AddHustleForm 
-          addHustle={addHustle}
+          submit={addHustle}
+          btnText="Add Hustle"
         />
         { 
           hustles.map(hustle => 
             <Hustle 
               {...hustle} 
               key={hustle.name}
-              deleteHustle={deleteHustle}/>)
+              deleteHustle={deleteHustle}
+              editHustle={editHustle}/>)
             }
     </div>
   )
