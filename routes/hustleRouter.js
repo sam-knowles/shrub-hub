@@ -48,11 +48,14 @@ hustleRouter.post("/", (req, res, next) => {
     })
 })
 
-hustleRouter.delete("/:hustleId", (req, res) => {
-    const hustleId = req.params.hustleId
-    const hustleIndex = hustles.findIndex(hustle => hustle._id === hustleId)
-    hustles.splice(hustleIndex, 1)
-    res.send("Successfully deleted hustle")
+hustleRouter.delete("/:hustleId", (req, res, next) => {
+    Hustle.findOneAndDelete({ _id: req.params.hustleId }, (err, deletedItem) => {
+        if(err){
+            res.status(500)
+            return next(err)
+        }
+        return res.status(200).send(`Successfully delted item ${deletedItem.name} from the database`)
+    })
 })
 
 hustleRouter.put("/:hustleId", (req, res) => {
