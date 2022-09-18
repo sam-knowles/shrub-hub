@@ -11,7 +11,7 @@ export default function AddHustleForm(props){
 
     function handleSubmit(e){
         e.preventDefault()
-
+        props.addHustle(inputs)
         setInputs(initInputs)
     }
 

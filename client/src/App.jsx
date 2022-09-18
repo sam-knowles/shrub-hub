@@ -12,13 +12,23 @@ export default function App() {
     .catch(err => console.log(err))
   }
 
+  function addHustle(newHustle){
+    axios.post("/hustles", newHustle)
+    .then(res => {
+      setHustles(prevHustles => [...prevHustles, res.data])
+    })
+    .catch(err => console.log(err))
+  }
+
   useEffect(() => {
     getHustles()
   }, [])
 
   return (
       <div>
-        <AddMovieForm />
+        <AddHustleForm 
+          addHustle={addHustle}
+        />
         { hustles.map(hustle => <Hustle {...hustle} key={hustle.name}/>)}
     </div>
   )
