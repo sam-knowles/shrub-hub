@@ -9,7 +9,7 @@ export default function App() {
   function getHustles(){
     axios.get('/hustles')
     .then(res => setHustle(res.data))
-    .catch(err => console.log(err))
+    .catch(err => console.log(err.response.data.errMsg))
   }
 
   function addHustle(newHustle){
