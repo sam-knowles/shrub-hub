@@ -20,6 +20,14 @@ export default function App() {
     .catch(err => console.log(err))
   }
 
+  function deleteHustle(hustleId){
+    axios.delete(`/hustles/${hustleId}`)
+    .then(res => {
+      setHustles(prevHustles => prevHustles.filter(hustle => hustle._id !== hustleId))
+    })
+    .catch(err => console.log(err))
+  }
+
   useEffect(() => {
     getHustles()
   }, [])
@@ -29,7 +37,13 @@ export default function App() {
         <AddHustleForm 
           addHustle={addHustle}
         />
-        { hustles.map(hustle => <Hustle {...hustle} key={hustle.name}/>)}
+        { 
+          hustles.map(hustle => 
+            <Hustle 
+              {...hustle} 
+              key={hustle.name}
+              deleteHustle={deleteHustle}/>)
+            }
     </div>
   )
 }

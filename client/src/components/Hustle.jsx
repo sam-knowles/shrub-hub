@@ -7,6 +7,8 @@ export default function Hustle(props){
             <h1>Name: { name }</h1>
             <p>Description: { description }</p>
             <p>market: { market }</p>
+                <button
+                    onClick={() => props.deleteHustle(_id)}>Delete</button>
         </div>
     )
 }
