@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import Hustle from './components/Hustle.jsx'
-import AddHustleForm from './components/AddHustleForm.jsx'
+import Hustle from './components/Hustle.jsx.js'
+import AddHustleForm from './components/AddHustleForm.jsx.js'
 
 export default function App() {
   const [hustles, setHustles] = useState([])
 
   function getHustles(){
-    axios.get('/hustles')
+    axios.get('/http://localhost:8000')
     .then(res => setHustle(res.data))
     .catch(err => console.log(err.response.data.errMsg))
   }

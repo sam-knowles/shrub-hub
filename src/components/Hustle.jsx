@@ -1,5 +1,5 @@
 import React from 'react'
-import AddHustleForm from './AddHustleForm.jsx'
+import AddHustleForm from './AddHustleForm.jsx.js'
 
 export default function Hustle(props){
     const { name, description, market, _id } = props
